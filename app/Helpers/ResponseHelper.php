@@ -4,6 +4,9 @@ namespace App\Helpers;
 
 class ResponseHelper
 {
+    /**
+     * Const defile local
+     */
     const TXT_TIME_OUT = 'Server error time out has data: ';
     const INTERNAL_SERVER_ERROR = 'Internal server error';
 
