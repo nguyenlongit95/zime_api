@@ -8,14 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
         'name',
         'file_size',
     ];
+
+    /**
+     * Function relationship to user table
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }

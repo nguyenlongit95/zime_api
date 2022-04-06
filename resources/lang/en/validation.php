@@ -160,4 +160,5 @@ return [
 
     'attributes' => [],
 
+    'login_failed' => 'Login failed, please check again',
 ];
