@@ -72,7 +72,7 @@ class UserController extends Controller
 
         try {
             // Update package_id into user
-            $this->userRepository->update($request->all(),Auth::user()->id);
+            $this->userRepository->update($request->all(), Auth::user()->id);
             return app()->make(ResponseHelper::class)->success(trans('validation.checkPackageSuccess') . $request->package_id);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
