@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login',[LoginController::class,'login']);
 Route::post('/register',[RegisterController::class,'register']);
 
-Route::middleware('auth:api')->name('api.')->group(function (){
-    Route::get('/user/check-package',[UserController::class,'checkPackage'])->name('checkPackage');
+Route::middleware('auth:api')->name('api.')->group(function () {
+    Route::get('/user/check-package',[UserController::class,'checkPackage']) -> name('checkPackage');
+    Route::get('/user/select-package',[UserController::class,'selectPackage']) -> name('selectPackage');
 });
