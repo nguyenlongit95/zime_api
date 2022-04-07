@@ -36,6 +36,7 @@ class RegisterController extends Controller
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function register(Request $request) {
+        //Validate data
         $validator = Validator::make($request->all(), [
             'email'=>'required|string|email|unique:users',
             'password'=>'required|string',
@@ -43,22 +44,16 @@ class RegisterController extends Controller
             'phone'=>'unique:users',
         ]);
         if ($validator->fails()) {
-            return response()->json([
-                'status'=>'fails',
-                'message' => $validator->errors()->first(),
-                'errors' => $validator->errors()->toArray(),
-            ]);
+            return app()->make(ResponseHelper::class)->validation($validator->errors()->toArray());
         }
+
         $param = $request->all();
         try {
             // Create new account
             $this->userRepository->create($param);
-            $storage_file = explode("@",$request->email);
-            Storage::makeDirectory('/public/' . array_shift($storage_file));
-            return response()->json([
-                'status' => 'success',
-                'message' => 'User register successfully.',
-            ]);
+            // Make new Directory for new user by email
+            Storage::makeDirectory('/public/' . explode("@",$request->email)[0]);
+            return app()->make(ResponseHelper::class)->success();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return app()->make(ResponseHelper::class)->error();

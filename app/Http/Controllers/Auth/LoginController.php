@@ -23,28 +23,18 @@ class LoginController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
-
         if ($validator->fails()) {
-            return app()->make(ResponseHelper::class)->validation(trans('validation.login_failed'));
+            return app()->make(ResponseHelper::class)->validation($validator->errors()->toArray());
         }
 
         $credentials = request(['email','password']);
-
         if (!Auth::attempt($credentials)){
-            return response()->json([
-                'status'=>'fails',
-                'message' => 'Unauthorized',
-            ],401);
+            return app()->make(ResponseHelper::class)->unAuthenticated();
         }
 
         $user = Auth::user();
-        $token = $user->createToken('MyApp')->accessToken;
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User login successfully!',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
+        //generate BearerToken
+        $token = $user->createToken($user->email)->accessToken;
+        return app()->make(ResponseHelper::class)->success($token);
     }
 }
