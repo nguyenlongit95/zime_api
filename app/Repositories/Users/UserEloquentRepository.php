@@ -11,7 +11,7 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
 {
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getModel()
     {
@@ -20,6 +20,7 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
 
     /**
      * function Check package by client
+     *
      * @param $user -> User is logged in
      */
     public function checkPackage($user)

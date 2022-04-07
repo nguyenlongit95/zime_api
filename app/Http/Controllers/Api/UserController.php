@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Repositories\Package\PackageRepositoryInterface;
 use App\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -35,7 +34,8 @@ class UserController extends Controller
     }
 
     /**
-     * Controller checkPackage by client
+     * @return mixed
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function checkPackage()
     {
@@ -66,7 +66,7 @@ class UserController extends Controller
         if (empty($this->packageRepository->find($request->package_id))) {
             return app()->make(ResponseHelper::class)->notFound(trans('validation.dataNotFound'));
         }
-        if ($this->userRepository->checkPackage(Auth::user())){
+        if ($this->userRepository->checkPackage(Auth::user())) {
             return app()->make(ResponseHelper::class)->success(trans('validation.checkPackageSuccess') . Auth::user()->package_id);
         }
 
