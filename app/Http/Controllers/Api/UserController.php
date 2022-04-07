@@ -27,11 +27,12 @@ class UserController extends Controller
     /**
      * Controller checkPackage by client
      */
-    public function checkPackage(){
-        if (!isset(Auth::user()->package_id)){
-            return app()->make(ResponseHelper::class)->notFound('Package not found!');
-        }else{
-            return app()->make(ResponseHelper::class)->success('You have used Package '.Auth::user()->package_id);
+    public function checkPackage()
+    {
+        if (!isset(Auth::user()->package_id)) {
+            return app()->make(ResponseHelper::class)->notFound(trans('validation.dataNotFound'));
+        } else {
+            return app()->make(ResponseHelper::class)->success(trans('validation.checkPackageSuccess ') . Auth::user()->package_id);
         }
     }
 
