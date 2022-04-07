@@ -4,5 +4,4 @@ namespace App\Repositories\Package;
 
 interface PackageRepositoryInterface
 {
-
 }
