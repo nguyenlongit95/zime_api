@@ -161,4 +161,6 @@ return [
     'attributes' => [],
 
     'login_failed' => 'Login failed, please check again',
+    'checkPackageSuccess' => 'You have used Package',
+    'dataNotFound' => 'Data not found!'
 ];
