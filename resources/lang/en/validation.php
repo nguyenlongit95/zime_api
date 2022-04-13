@@ -162,5 +162,10 @@ return [
 
     'login_failed' => 'Login failed, please check again',
     'checkPackageSuccess' => 'You have used Package ',
-    'dataNotFound' => 'Data not found!'
+    'dataNotFound' => 'Data not found!',
+    'uploadFileSuccess' => "Upload file success ",
+    'errorExt' => 'Error extension',
+    'exceedFileSize' => 'Exceed the specified file size',
+    'not_permission' => 'No permission to do action',
+    'delete_success' => 'Delete file successfully ',
 ];
