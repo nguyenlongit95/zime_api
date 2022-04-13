@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Files\FileEloquentRepository;
+use App\Repositories\Files\FileRepositoryInterface;
 use App\Repositories\Package\PackageEloquentRepository;
 use App\Repositories\Package\PackageRepositoryInterface;
 use App\Repositories\Users\UserEloquentRepository;
@@ -24,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PackageRepositoryInterface::class,
             PackageEloquentRepository::class,
+        );
+        $this->app->bind(
+            FileRepositoryInterface::class,
+            FileEloquentRepository::class,
         );
     }
 

@@ -52,7 +52,7 @@ class RegisterController extends Controller
             // Create new account
             $this->userRepository->create($param);
             // Make new Directory for new user by email
-            Storage::makeDirectory('/public/' . explode("@",$request->email)[0]);
+            Storage::makeDirectory('/public/' . $this->userRepository->trimEmail($request->email));
             return app()->make(ResponseHelper::class)->success();
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
