@@ -138,4 +138,5 @@ abstract class EloquentRepository implements RepositoryInterface
 
         return $model->get();
     }
+
 }

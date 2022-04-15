@@ -14,6 +14,11 @@ use phpseclib3\Crypt\Hash;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserRepositoryInterface
+     * @var PackageRepositoryInterface
+     * @var FileRepositoryInterface
+     */
     protected $userRepository;
     protected $packageRepository;
     protected $fileRepository;
@@ -28,6 +33,11 @@ class UserController extends Controller
         $this->fileRepository = $fileRepository;
     }
 
+    /**
+     * Controller function show list user
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $users = $this->userRepository->getAll(10,'desc');
@@ -37,6 +47,12 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Controller function show information of user, package of user and list files were uploaded by this user
+     *
+     * @param int $id of user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function detail($id)
     {
         $user = $this->userRepository->find($id);
@@ -54,6 +70,12 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Controller function show edit user information page
+     *
+     * @param int $id of user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
@@ -71,9 +93,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request,$id){
+    /**
+     * Controller function edit user's information progress
+     *
+     * @param Request $request
+     * @param int $id of user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request,$id)
+    {
         $data = $request->all();
-        if (is_null($data['password'])){
+        if (is_null($data['password'])) {
             unset($data['password']);
         } else {
             $data['password'] = \Illuminate\Support\Facades\Hash::make($request->input('password'));
@@ -81,7 +111,7 @@ class UserController extends Controller
         try {
             $this->userRepository->update($data,$id);
             Session::flash('success','Update user success');
-        } catch (\Exception $err){
+        } catch (\Exception $err) {
             Session::flash('error','Update user fail');
             \Log::info($err->getMessage());
         }
@@ -89,7 +119,7 @@ class UserController extends Controller
     }
 
     /**
-     * Controller function show file for ajax
+     * Controller function show detail file for ajax
      *
      * @param Request $request
      * @return mixed

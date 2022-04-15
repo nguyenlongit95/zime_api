@@ -16,4 +16,6 @@ interface UserRepositoryInterface
     public  function countTotalFilesByOtherUser($user);
 
     public function lastFileUpload($user);
+
+    public function totalUsers();
 }

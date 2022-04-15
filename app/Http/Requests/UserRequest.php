@@ -17,7 +17,7 @@ class UserRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules of user that apply to the request.
      *
      * @return array
      */

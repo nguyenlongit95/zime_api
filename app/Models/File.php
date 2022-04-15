@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'user_id',
         'name',
@@ -16,7 +15,7 @@ class File extends Model
     ];
 
     /**
-     * Function relationship to user table
+     * Function relationship to users table
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

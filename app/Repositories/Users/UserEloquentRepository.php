@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Repositories\Eloquent\EloquentRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserEloquentRepository extends EloquentRepository implements UserRepositoryInterface
 {
@@ -83,11 +84,21 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
      */
     public function lastFileUpload($user)
     {
-        $files = File::where('user_id', $user->id)->orderBy('updated_at', 'desc')->first();
+        $files = File::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
         if (empty($files)) {
             return null;
         }
-        $files->last_time_upload = Carbon::create($files->updated_at);
+        $files->last_time_upload = Carbon::create($files->created_at);
         return $files;
+    }
+
+    /**
+     * Repository function count total users in server
+     *
+     * @return int
+     */
+    public function totalUsers()
+    {
+        return DB::table('users')->count();
     }
 }

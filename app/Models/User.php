@@ -46,6 +46,8 @@ class User extends Authenticatable
     ];
 
     /**
+     * Function relationship to files table
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function files()
@@ -54,6 +56,8 @@ class User extends Authenticatable
     }
 
     /**
+     * Function relationship to packages table
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function package()

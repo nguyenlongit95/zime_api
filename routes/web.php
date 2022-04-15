@@ -44,4 +44,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function (){
         Route::delete('/delete',[UserController::class,'delete'])->name('delete');
         Route::get('/show-file',[UserController::class,'showFile'])->name('showFile');
     });
+    Route::prefix('dashboard')->name('dashboard.')->group(function(){
+        Route::get('/donut-chart',[DashboardController::class,'donutChart'])->name('donutChart');
+        Route::get('/area-chart',[DashboardController::class,'areaChart'])->name('areaChart');
+    });
 });

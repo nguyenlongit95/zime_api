@@ -9,17 +9,28 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+    /**
+     * Controller function show index login page
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return view('admin.auth.login');
     }
 
+    /**
+     * Controller function login progress
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         if (Auth::attempt([
             'email' => $request -> email,
             'password' => $request -> password,
-        ])){
+        ])) {
             return redirect()->route('admin.dashboard');
         }
         Session::flash('error','Incorrect username or password');
