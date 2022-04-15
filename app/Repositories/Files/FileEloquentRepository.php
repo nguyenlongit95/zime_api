@@ -26,4 +26,8 @@ class FileEloquentRepository extends EloquentRepository implements FileRepositor
         return File::where('user_id', Auth::user()->id)->get();
     }
 
+    public function listFileOfOtherUser($user){
+        return File::where('user_id', $user->id)->orderBy('id')->paginate(4);
+    }
+
 }

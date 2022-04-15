@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
-
+    public $table = "packages";
     protected $fillable = [
         'name',
         'max_file_upload',
