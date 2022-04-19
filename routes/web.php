@@ -47,5 +47,6 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function (){
     Route::prefix('dashboard')->name('dashboard.')->group(function(){
         Route::get('/donut-chart',[DashboardController::class,'donutChart'])->name('donutChart');
         Route::get('/area-chart',[DashboardController::class,'areaChart'])->name('areaChart');
+        Route::get('/line-chart',[DashboardController::class,'lineChart'])->name('lineChart');
     });
 });

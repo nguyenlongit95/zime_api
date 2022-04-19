@@ -43,6 +43,8 @@
 <script src="/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <!-- Bootstrap Switch -->
 <script src="/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 

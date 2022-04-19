@@ -8,6 +8,7 @@ use App\Repositories\Files\FileRepositoryInterface;
 use App\Repositories\Package\PackageRepositoryInterface;
 use App\Repositories\Users\UserRepositoryInterface;
 use Carbon\Carbon;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -80,7 +81,18 @@ class DashboardController extends Controller
     {
         $files = array();
         for ($i = 6; $i>=0; $i--) {
-            $files_tmp['total_file'] = DB::table('files')->whereDate('created_at', Carbon::now()->subDays($i))->count();
+            $files_tmp['total_file'] = $this->fileRepository->totalFilesLastDay($i);
+            $files_tmp['date'] = Carbon::now()->subDays($i)->format('d/m');
+            $files[$i] = $files_tmp;
+        }
+        return app()->make(ResponseHelper::class)->success($files);
+    }
+
+    public function lineChart()
+    {
+        $files = array();
+        for ($i = 29; $i>=0; $i--) {
+            $files_tmp['total_file'] = $this->fileRepository->totalFilesLastDay($i);
             $files_tmp['date'] = Carbon::now()->subDays($i)->format('d/m');
             $files[$i] = $files_tmp;
         }

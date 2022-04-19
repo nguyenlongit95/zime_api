@@ -112,11 +112,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
-                            </div>
+                            <canvas id="line-chart"></canvas>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -214,6 +211,7 @@
                                 pointStrokeColor    : 'rgba(60,141,188,1)',
                                 pointHighlightFill  : '#fff',
                                 pointHighlightStroke: 'rgba(60,141,188,1)',
+                                fill: 'origin',
                                 data                : [
                                     res.data[6].total_file,
                                     res.data[5].total_file,
@@ -250,31 +248,114 @@
                     new Chart(areaChartCanvas, {
                         type: 'line',
                         data: areaChartData,
-                        options: areaChartOptions
+                        options: {
+                            plugins: {
+                                filler: {
+                                    propagate: true
+                                }
+                            }
+                        }
                     })
-
                 }
             })
-
-
-
-        //-------------
+            //--------------
             //- LINE CHART -
             //--------------
-            var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-            var lineChartOptions = $.extend(true, {}, areaChartOptions)
-            var lineChartData = $.extend(true, {}, areaChartData)
-            lineChartData.datasets[0].fill = false;
-            lineChartData.datasets[1].fill = false;
-            lineChartOptions.datasetFill = false
 
-            var lineChart = new Chart(lineChartCanvas, {
-                type: 'line',
-                data: lineChartData,
-                options: lineChartOptions
+
+            $.ajax({
+                url : "{{url('/admin/dashboard/line-chart')}}",
+                type : 'get',
+                data : {},
+                success : function (res) {
+                    console.log(res);
+                    const labels = [
+                        res.data[29].date,
+                        res.data[28].date,
+                        res.data[27].date,
+                        res.data[26].date,
+                        res.data[25].date,
+                        res.data[24].date,
+                        res.data[23].date,
+                        res.data[22].date,
+                        res.data[21].date,
+                        res.data[20].date,
+                        res.data[19].date,
+                        res.data[18].date,
+                        res.data[17].date,
+                        res.data[16].date,
+                        res.data[15].date,
+                        res.data[14].date,
+                        res.data[13].date,
+                        res.data[12].date,
+                        res.data[11].date,
+                        res.data[10].date,
+                        res.data[9].date,
+                        res.data[8].date,
+                        res.data[2].date,
+                        res.data[7].date,
+                        res.data[6].date,
+                        res.data[5].date,
+                        res.data[4].date,
+                        res.data[3].date,
+                        res.data[2].date,
+                        res.data[1].date,
+                        res.data[0].date,
+                    ];
+
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Files Upload',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [res.data[29].date,
+                                res.data[28].total_file,
+                                res.data[27].total_file,
+                                res.data[26].total_file,
+                                res.data[25].total_file,
+                                res.data[24].total_file,
+                                res.data[23].total_file,
+                                res.data[22].total_file,
+                                res.data[21].total_file,
+                                res.data[20].total_file,
+                                res.data[19].total_file,
+                                res.data[18].total_file,
+                                res.data[17].total_file,
+                                res.data[16].total_file,
+                                res.data[15].total_file,
+                                res.data[14].total_file,
+                                res.data[13].total_file,
+                                res.data[12].total_file,
+                                res.data[11].total_file,
+                                res.data[10].total_file,
+                                res.data[9].total_file,
+                                res.data[8].total_file,
+                                res.data[2].total_file,
+                                res.data[7].total_file,
+                                res.data[6].total_file,
+                                res.data[5].total_file,
+                                res.data[4].total_file,
+                                res.data[3].total_file,
+                                res.data[2].total_file,
+                                res.data[1].total_file,
+                                res.data[0].total_file
+                            ],
+                        }]
+                    };
+
+                    const config = {
+                        type: 'line',
+                        data: data,
+                        options: {}
+                    };
+
+                    const myChart = new Chart(
+                        document.getElementById('line-chart'),
+                        config
+                    );
+                }
             })
-
-            // bootstrap
 
         })
     </script>

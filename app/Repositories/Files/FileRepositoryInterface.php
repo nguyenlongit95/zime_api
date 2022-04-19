@@ -9,4 +9,6 @@ interface FileRepositoryInterface
     public function listFileOfOtherUser($user);
 
     public function totalFiles();
+
+    public function totalFilesLastDay($i);
 }

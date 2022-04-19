@@ -4,6 +4,7 @@ namespace App\Repositories\Files;
 
 use App\Models\File;
 use App\Repositories\Eloquent\EloquentRepository;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,8 @@ class FileEloquentRepository extends EloquentRepository implements FileRepositor
      * @param $user
      * @return mixed
      */
-    public function listFileOfOtherUser($user){
+    public function listFileOfOtherUser($user)
+    {
         return File::where('user_id', $user->id)->orderBy('id')->paginate(4);
     }
 
@@ -42,7 +44,13 @@ class FileEloquentRepository extends EloquentRepository implements FileRepositor
      *
      * @return int
      */
-    public function totalFiles(){
+    public function totalFiles()
+    {
         return DB::table('files')->count();
+    }
+
+    public function totalFilesLastDay($i)
+    {
+        return DB::table('files')->whereDate('created_at', Carbon::now()->subDays($i))->count();
     }
 }
