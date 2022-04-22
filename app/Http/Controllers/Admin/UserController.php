@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 use App\Repositories\Files\FileRepositoryInterface;
 use App\Repositories\Package\PackageRepositoryInterface;
 use App\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use phpseclib3\Crypt\Hash;
 
@@ -38,12 +41,27 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->userRepository->getAll(10,'desc');
+        $users = $this->userRepository->getUserByRelationship();
+        $packages = $this->packageRepository->listAll();
+        $email = $request->get('email');
+        $phone = $request->get('phone');
+        $package = $request->get('package_id');
+        if ($package) {
+            $users = User::with('package')->orderBy('id', 'desc')->where('package_id', $package)->paginate(10);
+        }
+        if ($email) {
+            $users = User::with('package')->orderBy('id', 'desc')->where('email', 'like', '%' . $email . '%')->paginate(10);
+        }
+        if ($phone) {
+            $users = User::with('package')->orderBy('id', 'desc')->where('phone', 'like', '%' . $phone . '%')->paginate(10);
+        }
         return view('admin.users.index', [
             'title' => 'Users',
             'users' => $users,
+            'packages' => $packages,
+            'param' => $request->all()
         ]);
     }
 

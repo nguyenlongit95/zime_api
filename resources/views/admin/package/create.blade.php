@@ -13,11 +13,6 @@
     </div>
     <!-- Main content -->
     <section class="content">
-        @if(Session::has('success'))
-            <div class="alert alert-success text-center">
-                {{Session::get('success')}}
-            </div>
-        @endif
         <form role="form" method="post" action="{{url('admin/package/create')}}">
             <div class="card-body">
                 <div class="form-group">

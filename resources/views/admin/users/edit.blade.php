@@ -12,11 +12,6 @@
     </div>
     <!-- Main content -->
     <section class="content">
-        @if(Session::has('success'))
-            <div class="alert alert-success text-center">
-                {{Session::get('success')}}
-            </div>
-        @endif
         <div class="row">
             <div class="col-8">
                 <form role="form" method="post" action="{{url('admin/user/edit/' . $user->id)}}">

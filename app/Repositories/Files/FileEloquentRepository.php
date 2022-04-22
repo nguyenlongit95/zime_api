@@ -36,7 +36,7 @@ class FileEloquentRepository extends EloquentRepository implements FileRepositor
      */
     public function listFileOfOtherUser($user)
     {
-        return File::where('user_id', $user->id)->orderBy('id')->paginate(4);
+        return File::where('user_id', $user->id)->orderBy('id')->paginate(8);
     }
 
     /**
@@ -49,6 +49,12 @@ class FileEloquentRepository extends EloquentRepository implements FileRepositor
         return DB::table('files')->count();
     }
 
+    /**
+     * SQl function count total files were uploaded by all users last i days
+     *
+     * @param $i
+     * @return int total file
+     */
     public function totalFilesLastDay($i)
     {
         return DB::table('files')->whereDate('created_at', Carbon::now()->subDays($i))->count();

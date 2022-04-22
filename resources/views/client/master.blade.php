@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('admin.partials.header')
+    @include('client.partials.header')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <!-- Navbar -->
-@include('admin.partials.navbar')
+@include('client.partials.navbar')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('admin.partials.sidebar')
+@include('client.partials.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.alert')
+        @yield('alert')
         @yield('content')
     </div>
     <!-- /.content-wrapper -->
@@ -28,7 +28,8 @@
 </div>
 <!-- ./wrapper -->
 
-@include('admin.partials.footer')
+@include('client.partials.footer')
+<script src="{{ asset('js/app.js') }}" defer></script>
 @yield('modal')
 @yield('js')
 </body>

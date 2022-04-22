@@ -18,4 +18,6 @@ interface UserRepositoryInterface
     public function lastFileUpload($user);
 
     public function totalUsers();
+
+    public function getUserByRelationship();
 }

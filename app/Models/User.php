@@ -58,10 +58,11 @@ class User extends Authenticatable
     /**
      * Function relationship to packages table
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function package()
     {
-        return $this->hasOne(Package::class);
+        return $this->belongsTo(Package::class,'package_id')
+            ->withDefault(['name'=>'-']);
     }
 }

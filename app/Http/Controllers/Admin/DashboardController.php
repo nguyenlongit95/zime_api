@@ -8,8 +8,6 @@ use App\Repositories\Files\FileRepositoryInterface;
 use App\Repositories\Package\PackageRepositoryInterface;
 use App\Repositories\Users\UserRepositoryInterface;
 use Carbon\Carbon;
-use http\Env\Request;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {

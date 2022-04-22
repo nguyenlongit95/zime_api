@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('admin.auth.login');
+        return view('client.auth.login');
     }
 
     /**
@@ -31,7 +31,7 @@ class LoginController extends Controller
             'email' => $request -> email,
             'password' => $request -> password,
         ])) {
-            return redirect('/admin/dashboard');
+            return redirect('/');
         }
         Session::flash('error','Incorrect username or password');
         return redirect()->back();

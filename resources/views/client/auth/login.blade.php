@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="card-body login-card-body">
-            <form action="{{url('/admin/login/authenticate')}}" method="post">
+            <form action="{{url('/login/authenticate')}}" method="post">
                 @if(Session::has('error'))
                     <div class="alert alert-danger text-center">
                         {{Session::get('error')}}

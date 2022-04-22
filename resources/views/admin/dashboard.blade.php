@@ -188,7 +188,7 @@
                 data : {},
                 success : function (res) {
                     console.log(res);
-// Get context with jQuery - using jQuery's .get() method.
+            // Get context with jQuery - using jQuery's .get() method.
                     var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
                     var areaChartData = {

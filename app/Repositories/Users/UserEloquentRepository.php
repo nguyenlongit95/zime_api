@@ -101,4 +101,12 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
     {
         return DB::table('users')->count();
     }
+
+    /**
+     *
+     */
+    public function getUserByRelationship()
+    {
+        return User::with('package')->orderBy('id', 'desc')->paginate(10);;
+    }
 }

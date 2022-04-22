@@ -13,4 +13,5 @@ class Package extends Model
         'max_file_upload',
         'max_file_size',
     ];
+
 }
